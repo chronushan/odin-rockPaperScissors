@@ -1,19 +1,15 @@
 function getComputerChoice() {
 	let random;
 	let choice;
-	do {
-		random = Math.floor(Math.random() * 10);
-		if (random < 4) {
-			// Random = 1~3
-			choice = "rock";
-		} else if (random < 7) {
-			// Random = 4~6
-			choice = "paper";
-		} else {
-			// Random = 7~9
-			choice = "scissors";
-		}
-	} while (choice == 0);
+
+	random = Math.floor(Math.random() * 3);
+	if (random == 0) {
+		choice = "rock";
+	} else if (random == 1) {
+		choice = "paper";
+	} else if (random == 2) {
+		choice = "scissors";
+	}
 
 	return choice;
 }
@@ -42,5 +38,33 @@ function getHumanChoice() {
 	return choice;
 }
 
-console.log(`Human: ${getHumanChoice()}`);
-console.log(`Computer: ${getComputerChoice()}`);
+let humanScore = 0;
+let computerScore = 0;
+
+function playFiveRounds() {
+	while (humanScore < 5 && computerScore < 5) {
+		let humanChoice = getHumanChoice();
+		let computerChoice = getComputerChoice();
+		if (humanChoice == "rock" && computerChoice == "scissors") {
+			humanScore += 1;
+		} else if (humanChoice == "paper" && computerChoice == "rock") {
+			humanScore += 1;
+		} else if (humanChoice == "scissors" && computerChoice == "paper") {
+			humanScore += 1;
+		} else if (humanChoice == computerChoice) {
+			continue;
+		} else {
+			computerScore += 1;
+		}
+		console.log(humanChoice, computerChoice);
+		console.log(humanScore, computerScore);
+	}
+	if (humanScore == 5) {
+		alert("You Win!");
+	} else if (computerScore == 5) {
+		alert("You lose!");
+	}
+	alert(`You: ${humanScore} vs Computer: ${computerScore}`);
+}
+
+playFiveRounds();
