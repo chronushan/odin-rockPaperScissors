@@ -66,5 +66,12 @@ buttons.forEach((item) => {
 		playRound(item.textContent.toLowerCase());
 		const score = document.querySelector("#score");
 		score.textContent = `Your Score: ${humanScore}\nComputer Score: ${computerScore}`;
+		if (humanScore == 5 || computerScore == 5) {
+			if (humanScore > computerScore) {
+				alert("You win!");
+			} else {
+				alert("You lose!");
+			}
+		}
 	});
 });
