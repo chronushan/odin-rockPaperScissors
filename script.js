@@ -41,30 +41,30 @@ function getHumanChoice() {
 let humanScore = 0;
 let computerScore = 0;
 
-function playFiveRounds() {
-	while (humanScore < 5 && computerScore < 5) {
-		let humanChoice = getHumanChoice();
-		let computerChoice = getComputerChoice();
-		if (humanChoice == "rock" && computerChoice == "scissors") {
-			humanScore += 1;
-		} else if (humanChoice == "paper" && computerChoice == "rock") {
-			humanScore += 1;
-		} else if (humanChoice == "scissors" && computerChoice == "paper") {
-			humanScore += 1;
-		} else if (humanChoice == computerChoice) {
-			continue;
-		} else {
-			computerScore += 1;
-		}
-		console.log(humanChoice, computerChoice);
-		console.log(humanScore, computerScore);
+function playRound(humanChoice) {
+	let computerChoice = getComputerChoice();
+	if (humanChoice == "rock" && computerChoice == "scissors") {
+		humanScore += 1;
+	} else if (humanChoice == "paper" && computerChoice == "rock") {
+		humanScore += 1;
+	} else if (humanChoice == "scissors" && computerChoice == "paper") {
+		humanScore += 1;
+	} else if (humanChoice == computerChoice) {
+		alert("Tie, try again.");
+	} else {
+		computerScore += 1;
 	}
-	if (humanScore == 5) {
-		alert("You Win!");
-	} else if (computerScore == 5) {
-		alert("You lose!");
-	}
-	alert(`You: ${humanScore} vs Computer: ${computerScore}`);
 }
 
-playFiveRounds();
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach((node) => console.log(node));
+
+buttons.forEach((item) => {
+	item.addEventListener("click", (event) => {
+		event.preventDefault();
+		playRound(item.textContent.toLowerCase());
+		const score = document.querySelector("#score");
+		score.textContent = `Your Score: ${humanScore}\nComputer Score: ${computerScore}`;
+	});
+});
